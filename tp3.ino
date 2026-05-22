@@ -3,12 +3,9 @@
 #define azul 9
 #define sensorluz A0
 #define sensortemp A1
-int a;
-int r;
-int v;
-int sensort;
-int sensorl;
 
+int sensort; 
+int sensorl;
 
 void setup()
 {
@@ -17,50 +14,58 @@ void setup()
   pinMode(azul, OUTPUT);
   pinMode(sensorluz, INPUT);
   pinMode(sensortemp, INPUT);
-  Serial.begin(9800);
+  Serial.begin(9600);
 }
 
 void loop()
 {
-  sensort = analogRead(sensortemp);
-  sensorl = analogRead(sensorluz);
-  sensort = map(sensort, 0, 1023, 0, 255);
-  sensorl = map(sensorl, 0, 1023, 0, 100);
+  int lecturaTMP = analogRead(sensortemp);
+  float voltaje = lecturaTMP * (5.0 / 1023.0);
+  sensort = (voltaje - 0.5) * 100.0;
+  
+  int lecturaLDR = analogRead(sensorluz);
+  sensorl = map(lecturaLDR, 0, 1023, 100, 0);
+
+  Serial.print("El nivel de luz actual es: ");
+  Serial.print(sensorl);
+  Serial.print("% y la temperatura actual: ");
+  Serial.print(sensort);
+  Serial.println(" ºc");
+
   prenderleds();
-  Serial.println(sensorl);
+  
+  delay(1000);
 }
+
 void prenderleds(){
-    if(sensorl >= 77 || sensorl <= 86){
-    if(sensort > 71)
+  if(sensorl >= 30 && sensorl <= 70){
+    
+    if(sensort > 90)
     {
       analogWrite(rojo, 255);
+      analogWrite(verde, 0);
+      analogWrite(azul, 0);
     } 
-      else
-      {
-        analogWrite(rojo, 0);
-      }
-      
-      if(sensort < 34)
-      {
-        analogWrite(azul, 255);
-      }
-      else
-      {
-        analogWrite(azul, 0);
-      } 
-      if(sensort >= 34 && sensort <= 71)
-      {
-        analogWrite(verde, 255);
-      }
-      else
-      {
-        analogWrite(verde, 0);
-      }}
-      else
-      {
-        
-      }}
+    else if(sensort < 18)
+    {
+      analogWrite(rojo, 0);
+      analogWrite(verde, 0);
+      analogWrite(azul, 255);
+    }
+    else
+    {
+      analogWrite(rojo, 0);
+      analogWrite(verde, 255);
+      analogWrite(azul, 0);
+    }
+    
+  } else {
+    apagartodo();
+  }
+}
+
 void apagartodo(){
- analogWrite(rojo, 0);
+  analogWrite(rojo, 0);
   analogWrite(verde, 0);
-  analogWrite(azul, 0);}
+  analogWrite(azul, 0);
+}
