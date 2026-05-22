@@ -19,18 +19,18 @@ void setup()
 
 void loop()
 {
-  int lecturaTMP = analogRead(sensortemp);
-  float voltaje = lecturaTMP * (5.0 / 1023.0);
+  int temperatura = analogRead(sensortemp);
+  float voltaje = temperatura * (5.0 / 1023.0);
   sensort = (voltaje - 0.5) * 100.0;
   
-  int lecturaLDR = analogRead(sensorluz);
-  sensorl = map(lecturaLDR, 0, 1023, 100, 0);
+  int nivelluz = analogRead(sensorluz);
+  sensorl = map(nivelluz, 0, 1023, 100, 0);
 
   Serial.print("El nivel de luz actual es: ");
   Serial.print(sensorl);
   Serial.print("% y la temperatura actual: ");
   Serial.print(sensort);
-  Serial.println(" ºc");
+  Serial.println(" grados");
 
   prenderleds();
   
@@ -38,7 +38,7 @@ void loop()
 }
 
 void prenderleds(){
-  if(sensorl >= 30 && sensorl <= 70){
+  if(sensorl >= 15 && sensorl <= 23){
     
     if(sensort > 90)
     {
@@ -69,3 +69,4 @@ void apagartodo(){
   analogWrite(verde, 0);
   analogWrite(azul, 0);
 }
+
