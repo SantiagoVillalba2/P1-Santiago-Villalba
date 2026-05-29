@@ -1,1 +1,1 @@
-# P1-Santiago-Villalba
+Hacer que cuando un pulsador se presione y un sensor de luz este a mas de 50% de luz. Se active un sistema que cuando se detecte movimiento con un sensor de movimiento, se prende un led RGB en color violeta.
