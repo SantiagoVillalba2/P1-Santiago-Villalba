@@ -3,6 +3,7 @@
 #define rojo 7
 #define mov 2
 bool movimiento1;
+
 void setup()
 {
   pinMode(mov, INPUT);
@@ -13,17 +14,18 @@ void setup()
 
 void loop()
 {
- movimiento1 = digitalRead(mov);
+  movimiento1 = digitalRead(mov);
+  
   if(movimiento1 == HIGH){
+    digitalWrite(verde, LOW);
     digitalWrite(rojo, HIGH);
-    delay(100);
-    digitalWrite(rojo, LOW);
     tone(buzzer, 1000);
+    delay(100);
   } 
   if(movimiento1 == LOW){
+    digitalWrite(rojo, LOW);
+    noTone(buzzer);
     digitalWrite(verde, HIGH);
     delay(100);
-    digitalWrite(verde, LOW);
-    noTone(buzzer);
   }
 }
