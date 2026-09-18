@@ -65,6 +65,8 @@ void loop()
   potencio = map(pot, 0, 1023, 0, 100);
   temperatura = analogRead(temp);
   temperatura = map(((temperatura - 20) * 3.04), 0, 1023, -40, 125);
+  LeerTemp();
+  moverservo()
   if(melodia == true){
     lcd1.setCursor(0,0);
     lcd1.print("Melodia");
