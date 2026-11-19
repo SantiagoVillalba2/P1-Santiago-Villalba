@@ -1,4 +1,4 @@
-#Trabajo Practico Nº10: Sistema de apertura automatizado
+
 Utilizando un sensor de movimiento para identificar si hay una persona acercándose a una puerta ( la puerta es doble )
 Utilizar un par de servo-motores para abrirle ambas puertas a la persona. (Cuando suceda hacer sonar una cancioncita de 5 notas).
 Utilizar otro sensor de movimiento del otro lado de la puerta para cerrar la puerta cuento la persona termino de cruzarla. (Cuando suceda hacer sonar otra cancioncita de 5 notas).
